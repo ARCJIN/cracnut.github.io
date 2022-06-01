@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    {% load static %}
+    <!-- JavaScript Bundle with Popper -->
+
+
+    <link rel="stylesheet" href={% static 'css/customerlogin.css' %}>
+
+
+
+
+        <div class="container" id="container">
+
+          <div class="form-container sign-in-container">
+            <form  action="" method="POST"  id="contact_form">
+              {% csrf_token %}
+              <h1>Jinx SignUp</h1>
+              <div class="social-container">
+        				<a href="#" class="social"><i class="fa fa-facebook"></i></a>
+        				<a href="#" class="social"><i class="fa fa-google"></i></i></a>
+        				<a href="#" class="social"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+        			</div>
+
+
+              <input type="text" placeholder="Name" name="name" />
+              <input type="text" placeholder="Username" name="username" />
+              <input type="email" placeholder="Email" name="email" />
+              <input type="password" placeholder="Password" name="password" />
+
+              <span>{{msg}} *Username and Password will not be provided later</span><br>
+              <button type="submit" >Sign Up</button>
+            </form>
+          </div>
+          <div class="overlay-container">
+            <div class="overlay">
+
+              <div class="overlay-panel overlay-right">
+                <h1>Hello Friends !!</h1>
+                <p>Already has an account? </p>
+                <a href={% url 'customer_login' %}><button class="ghost" id="signUp">LogIn</button></a>
+
+
+                <a href={% url 'seller_login' %}><button class="ghost" id="signUp">Go Seller!</button></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <footer>
+        	<p>
+        		Created with <i class="fa fa-heart"></i> by
+        		<a  href="#">Vineet Chauhan &nbsp</a>
+            Owned by Vinstec <i class="fa fa-hand-rock-o" aria-hidden="true"></i>
+
+        	</p>
+        </footer>
+
+
+
+
+
+
+
+
+
+
+
+      <link rel="stylesheet" href={% static 'js/loginc.js' %}>
+  </body>
+</html>

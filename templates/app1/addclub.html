@@ -1,0 +1,107 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% if user.is_login %}
+
+{% load static %}
+<!-- JavaScript Bundle with Popper -->
+
+
+<link rel="stylesheet" href={% static 'css/stag.css' %}>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container" id="container">
+
+  <div class="form-container sign-in-container">
+    <form  action="" method="POST"  id="contact_form" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h3>Club form</h3> <br>
+      <span>Connect-Earn-Enjoy</span>
+<br>
+
+
+          <input  type="text" name="name" id="p1" placeholder="Name">
+
+
+
+          <input type="password" name="password" id="p2" placeholder="Password">
+
+
+
+          <input  placeholder="Description" type="text" name="text" id="p3">
+
+
+
+          <input name="fees_to_enter" placeholder="Entry Fees" type="number" id="p4">
+          <input id='profile_image' name="profile_image" placeholder="Club Image"   type="file">
+          <input type="hidden" name="creation_fees" value=100>
+
+
+
+      <button type="submit" >Create</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+
+      <div class="overlay-panel overlay-right">
+        <h1>Hola Amigos!</h1>
+        <p>Create your own group and spread your network </p>
+        <p>Fees of mining a Club : 100 VNITS </p>
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+{% else %}
+  You need to login
+
+{% endif %}
+
+
+
+{% endblock %}

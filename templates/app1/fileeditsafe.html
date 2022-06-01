@@ -1,0 +1,517 @@
+
+
+
+
+
+
+
+
+
+
+Code for Searchlist.html including customers and sellers database
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/profile.css'%} >
+{% if user.is_login %}
+
+{% if searched %}
+
+<h4>You searched for....{{searched}}</h4>
+<h5>Use better keywords if you cannot find your search</h5>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+<!--
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-6">
+            <div class="p-3 bg-white text-center">
+                <div><img src="https://i.imgur.com/yFeV2ed.png">
+                    <h2>Profile</h2><hr>
+                </div>
+
+
+
+
+                {% for following in customers %}
+                  {% if forloop.counter < 10 %}
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="d-flex flex-row align-items-center"><img class="rounded-circle" src={{following.profile_image.url}} width="55" height="55">
+                        <div class="d-flex flex-column align-items-start ml-2"><span class="font-weight-bold">&nbsp@&nbsp{{following.username}}</span><span class="followers">{{following.followers.count}} Followers</span></div>
+
+                    </div>
+                    {% if following.is_certified %}<img height="30px" src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-approval-alert-icongeek26-outline-colour-icongeek26.png"/>{% endif %}
+                      <div class="d-flex flex-row align-items-center mt-2">   <a href={% url 'customer_detail' pk=following.id %}> <button class="btn btn-outline-danger">  Visit Profile </button></a> </div>
+
+                </div><br>
+                {% endif %}
+
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-6">
+            <div class="p-3 bg-white text-center">
+                <div><img src="https://i.imgur.com/yFeV2ed.png">
+                    <h2>Products</h2><hr>
+                </div>
+
+
+
+
+                {% for following in products %}
+                  {% if forloop.counter < 10 %}
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="d-flex flex-row align-items-center"><img class="rounded-circle" src={{following.profile_image1.url}} width="55" height="55">
+                        <div class="d-flex flex-column align-items-start ml-2"><span class="font-weight-bold">&nbsp&nbsp{{following.name}}</span><span class="followers">&nbsp Price: {{following.price}}</span></div>
+
+                    </div>
+
+                      <div class="d-flex flex-row align-items-center mt-2">   <a href={% url 'product_detail' pk=following.id %}> <button class="btn btn-outline-danger">  View </button></a> </div>
+
+                </div><br>
+                {% endif %}
+
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!--
+
+
+
+
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-6">
+            <div class="p-3 bg-white text-center">
+                <div><img src="https://i.imgur.com/yFeV2ed.png">
+                    <h2>Sellers</h2><hr>
+                </div>
+
+
+
+
+                {% for following in sellers %}
+                  {% if forloop.counter < 10 %}
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="d-flex flex-row align-items-center"><img class="rounded-circle" src={{following.profile_image.url}} width="55" height="55">
+                        <div class="d-flex flex-column align-items-start ml-2"><span class="font-weight-bold">&nbsp@&nbsp{{following.username}}</span><span class="followers">{{following.followers.count}} Followers</span></div>
+
+                    </div>
+                    {% if following.is_certified %}<img height="30px" src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-approval-alert-icongeek26-outline-colour-icongeek26.png"/>{% endif %}
+                      <div class="d-flex flex-row align-items-center mt-2">   <a href={% url 'seller_detail' pk=following.id %}> <button class="btn btn-outline-danger">  Visit Profile </button></a> </div>
+
+                </div><br>
+                {% endif %}
+
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+You Have not searched yet
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+Login to view this page
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/add_customer.css'%}>
+
+{% if user.is_login %}
+  {% if seller.is_block == False %}
+    {% if user.is_admin or user == seller%}
+
+
+
+  <h3>  @{{seller.username}}<br></h3>
+    <a href={% url 'seller_detail' pk=seller.id %}><img src={{seller.profile_image.url}} alt="Seller Profile photo" height=200px ></a>
+    <div class="container" >
+
+      <form class="well form-horizontal" action="" method="POST"  id="contact_form" enctype="multipart/form-data">
+  <fieldset>
+{% csrf_token %}
+  <!-- Form Name -->
+  <legend><center><h2><b>Update Yourself</b></h2></center></legend><br>
+  <legend><center><h5><b>Edit whatever you want </b></h5></center></legend><br>
+
+  <!-- Text input-->
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="name" placeholder="Name" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Text input-->
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="contactnumber" placeholder="ContactNumber" class="form-control"  type="phone">
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="password" placeholder="Password" class="form-control"  type="password">
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input-->
+
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="shop_address" placeholder="Shop Address" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Text input-->
+
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="home_address" placeholder="Home Address" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Text input-->
+
+
+      <div class="form-group" align = "center">
+        <label class="col-md-4 control-label" ></label>
+          <div class="col-md-4 inputGroupContainer" >
+          <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input id='image' name="profile_image" placeholder="Profile_image" class="form-control"  type="file">
+          </div>
+        </div>
+      </div>
+
+  <!-- Text input-->
+
+{% if user.is_admin %}
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input id='crypto_owned' name="crypto_owned" placeholder="CryptoOwned" class="form-control"  type="number">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input id='money_owned' name="money_owned" placeholder="MoneyOwned" class="form-control"  type="number">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+Certify? <br>
+  True:<input id='True' name="is_certified" placeholder="" class="form-control"  type="radio" value=True>
+  False:<input id='False' name="is_certified" placeholder="" class="form-control"  type="radio" value=False>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+admin? <br>
+  True:<input id='True' name="is_admin" placeholder="IsAdmin?" class="form-control"  type="radio" value=True>
+  False:<input id='False' name="is_admin" placeholder="IsAdmin?" class="form-control"  type="radio" value=False>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+{% endif %}
+
+  <!-- Button -->
+  <div class="form-group" align="center">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4"><br>
+      &nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUPDATE <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+  </div>
+      </div>
+
+
+
+<link rel="stylesheet" href={% static 'js/customerlogin.js' %}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+      You are not Authenticated to complete this task
+    {% endif %}
+
+
+  {% else %}
+      The Functions on this customer are blocked due to INAPPROPRIATE ACTIONS
+  {% endif %}
+
+{% else %}
+  You need to login first
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/stag.css'%}>
+
+{% if user.is_login %}
+  {% if comment.is_block == False %}
+    {% if user.is_admin or user == comment.creator %}
+
+
+
+
+    <div class="container" >
+
+      <form class="well form-horizontal" action="" method="POST"  id="contact_form">
+  <fieldset>
+{% csrf_token %}
+  <!-- Form Name -->
+  <legend><center><h2><b>Edit Comment</b></h2></center></legend><br>
+
+
+  <!-- Text input-->
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="text" placeholder="Comment" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="form-group" align="center">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4"><br>
+      &nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUPDATE <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div>
+  </div>
+
+
+
+
+</fieldset>
+</form>
+</div>
+
+
+
+
+
+
+
+    {% else %}
+      You are not Authenticated to complete this task
+    {% endif %}
+
+
+  {% else %}
+      The Functions on this customer are blocked due to INAPPROPRIATE ACTIONS
+  {% endif %}
+
+{% else %}
+  You need to login first
+{% endif %}
+
+{% endblock %}

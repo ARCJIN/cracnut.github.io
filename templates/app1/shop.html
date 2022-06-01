@@ -1,0 +1,169 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+{% load static %}
+
+
+
+
+
+
+
+<link rel="stylesheet" href={% static 'css/product_list.css' %}>
+
+
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+      <div class="row">
+
+        <!--Sidebar-->
+        <div class="col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+
+          <div class="widget-wrapper">
+            <h4>Categories:</h4>
+            <br>
+            <div class="list-group">
+              <a href={% url 'women' %} class="list-group-item">Women</a>
+              <a href={% url 'men' %} class="list-group-item">Men</a>
+              <a href={% url 'winter' %} class="list-group-item">Winter Collection</a>
+              <a href={% url 'summer' %} class="list-group-item">Summer Collection</a>
+              <a href="#" class="list-group-item">Electronics</a>
+              <a href="#" class="list-group-item">Eye Wear</a>
+              <a href="#" class="list-group-item">Cosmetics</a>
+              <a href="#" class="list-group-item">Jewellery</a>
+              <a href="#" class="list-group-item">Kitchen</a>
+              <a href={% url 'beach' %} class="list-group-item">Beach Wear</a>
+            </div>
+          </div>
+
+
+
+        </div>
+        <!--/.Sidebar-->
+
+        <!--Main column-->
+        <div class="col-lg-8">
+
+          <!--First row-->
+
+          <!--/.First row-->
+          <br><br>
+          <hr class="extra-margins">
+
+          <!--Second row-->
+
+          <!--/.Second row-->
+
+
+
+                    {% if itemtotalcount == 0 %}
+                    <i class="fa fa-camera" aria-hidden="true" style="font-size:256px"></i>
+                    {% endif %}
+
+                          <div class="row">
+                            <!--First columnn-->
+                            {% for item in items %}
+                            {% if item.is_block == False or user.is_admin == True %}
+                            <div class="col-lg-4">
+                              <!--Card-->
+                              <div class="card  wow fadeIn" data-wow-delay="0.2s">
+
+                                <!--Card image-->
+
+
+                                <div class="view overlay hm-white-slight">
+                                 {% if item.profile_image1 %} <a href={% url 'product_detail' item.id %}><img class="userpicimg" height="200px" width="226px" src= {{item.profile_image1.url}} alt=""></a> {% else %} <img src=https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png alt="" height="200px"> {% endif %}
+
+                                </div>
+                                <!--/.Card image-->
+
+                                <!--Card content-->
+                                <div class="card-block">
+                                  <!--Title-->
+                                  <h4 class="card-title">{{item.name}}</h4>
+                                  <!--Text-->
+                                  <p class="card-text">Price: {{item.price}}</p>
+                                  <p class="card-text">Purchases: {{item.number_of_purchases}}</p>
+                                  <a href={% url 'product_detail' item.id %} ><button class="btn btn-outline-danger"><strong>View Product</strong></button></a>
+                                </div>
+                                <!--/.Card content-->
+
+                              </div>
+                              <!--/.Card-->
+
+
+
+
+
+
+
+
+                            </div>
+                            <!--First columnn-->
+                            {% endif %}
+                            {% endfor %}
+
+
+
+
+
+
+
+                          </div>
+
+
+
+
+
+
+
+        </div>
+        <!--/.Main column-->
+
+      </div>
+    </div>
+    <!--/.Main layout-->
+
+  </main>
+  <br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href={% static 'js/follower_list.js' %}>
+
+
+
+
+
+
+
+
+{% endblock %}

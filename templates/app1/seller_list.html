@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul class="list-group list-group-horizontal-md">
+    {% for seller in seller_list %}
+
+        <div class="customer">
+
+            <h1><a href="{% url 'seller_detail' pk=seller.pk %}">{{ seller.username }}</a></h1>
+            <div class="date">
+                <p> </p>
+            </div>
+
+        </div>
+      {% endfor %}

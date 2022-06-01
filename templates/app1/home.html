@@ -1,0 +1,284 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href= {% static 'css/gotohome.css'%} >
+<br>
+
+<h1><span class="blue">JINX</span><span class="blue"></span> <span class="yellow">CORP.</span></h1>
+
+
+{% if user.is_login or user.is_admin %}
+{% csrf_token %}
+
+
+
+
+<!--
+
+{{msg}}
+
+
+
+
+{% if user.is_seller %}
+{% else %}
+<p>
+<br>
+
+
+
+</p>
+<div class="container" >
+<form  class=""well form-horizontal""  method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+  <legend><center><h2><b>CREATE POST</b></h2></center></legend><br>
+  <legend><center><h5><b>For Content of your Choice</b></h5></center></legend><br>
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input id='image' name="profile_image" placeholder="POST" class="form-control"  type="file" accept="video/*,image/*">
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="desc" placeholder="Add Description" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+<br>
+
+
+
+<br>
+
+<div class="form-group" align="center">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"><br>
+    &nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+  </div>
+</div>
+
+
+{% endif %}
+
+
+</form>
+</div>
+<br>
+
+
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+<br>
+<hr>
+<h1><span class="blue">&lt;</span>Leaderboard<span class="blue">&gt;</span> <span class="yellow">Battle</span></h1>
+<br>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Rank</h1></th>
+			<th><h1>Username</h1></th>
+			<th><h1>Followers</h1></th>
+			<th><h1>Following</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for leader in leaders %}
+    {% if forloop.counter < 11 %}
+    <tr>
+      <td> {{forloop.counter}}. </td>
+      <td><a href={% url 'customer_detail' pk=leader.id %}>@{{leader.username}}</a></td>
+      <td>{{leader.followers.count}}</td>
+      <td>{{leader.followings.count}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+
+    {% for i in leaders %}
+    {% if i == user %}
+    <tr>
+      <td> {{forloop.counter}}. </td>
+      <td><a href={% url 'customer_detail' pk=i.id %}>@{{i.username}}</a></td>
+      <td>{{i.followers.count}}</td>
+      <td>{{i.followings.count}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+
+	</tbody>
+</table>
+
+<br>
+
+
+
+
+
+
+
+<hr><br>
+<h1><span class="blue">&lt;</span>Top Content <span class="blue">&gt;</span> <span class="yellow">Battle</span></h1>
+<br>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Rank</h1></th>
+			<th><h1>Post</h1></th>
+			<th><h1>Creator</h1></th>
+			<th><h1>Likes</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for leader in postleaders %}
+    {% if forloop.counter < 11 %}
+    <tr>
+      <td> {{forloop.counter}}. </td>
+      <td><a href={% url 'post_detail' pk=leader.id %}><img  height="300" width="200" src={{leader.profile_image.url}} alt=""></a></td>
+      <td><a href={% url 'customer_detail' pk=leader.creator.id %}>{{leader.creator.username}}</a></td>
+      <td>{{leader.likers.count}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+
+  </table>
+
+	</tbody>
+</table>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+
+<h1><span class="blue">&lt;</span>Company Data<span class="blue">&gt;</span> <span class="yellow">INCARRY</span></h1>
+<h2>Created with love by <a href=# target="_blank">Vineet Chauhan</a></h2>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Total Order</h1></th>
+			<th><h1>Orders Delivered</h1></th>
+			<th><h1>Orders Pending</h1></th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+      <td>{{no_of_orders}}</td>
+      <td>{{orders_delivered.count}}</td>
+      <td>{{orders_pending.count}}</td>
+
+		</tr>
+
+	</tbody>
+</table>
+
+<br>
+<br>
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Total Customer</h1></th>
+			<th><h1>Total Sellers</h1></th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+      <td>{{no_of_users}}</td>
+      <td>{{no_of_sellers}}</td>
+
+		</tr>
+
+	</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+{% if user.is_admin %}
+<a  href={% url 'create_customer'%}>Admin Customer Signup</a>
+
+{% endif %}
+
+
+
+<hr>
+
+
+
+
+
+
+    {% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/postupdate.css'%}>
+
+{% if user.is_login %}
+  {% if product.is_block == False %}
+
+
+
+  {% else %}
+      The Functions on this customer are blocked due to INAPPROPRIATE ACTIONS
+  {% endif %}
+
+{% else %}
+  You need to login first
+{% endif %}
+
+{% endblock %}

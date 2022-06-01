@@ -1,0 +1,63 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+
+
+{% if user.is_login %}
+
+
+  {% for post in posts %}
+    {% if post.creator in user.followings.all or post.creator == user and post.is_block == False or user.is_admin  %}
+    <a href={%url 'customer_detail' pk=post.creator.id %}><img src={{post.creator.profile_image.url}} id="h2" alt="creator photo" height=100px width=100px> </a> <span id="h3"><h3>@{{post.creator.username}}</h3></span><br><br><br><br>
+      <a href={% url 'post_detail' pk=post.pk %}><img src={{post.profile_image.url}} id="h1" alt="Post of following" height = 300px></a>
+
+        <br>
+        
+
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+
+
+
+
+
+    <style media="screen">
+      #h1{
+        align: center;
+        width: 720px;
+height: 540px;
+
+
+background: #C4C4C4;
+border: 2px solid #F00505;
+box-sizing: border-box;
+border-radius: 138px;
+      }
+
+      #h2{
+
+position: absolute;
+width: 120px;
+height: 120px;
+left: 470px;
+
+
+
+border: 2px solid #F00505;
+box-sizing: border-box;
+border-radius: 180px;
+      }
+      #h3{
+        left: 500px;
+      }
+
+    </style>
+
+
+
+
+
+{% endblock %}

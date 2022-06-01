@@ -1,0 +1,209 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/customer_detail.css'%}>
+
+{% if user.is_login %}
+
+
+     <div class="padding">
+
+
+        <div class="col-md-10">
+            <!-- Column -->
+            <div class="card">
+                <div class="card-body little-profile text-center">
+                    <div class="pro-img">{% if user.profile_image %} <img src={{user.profile_image.url}} alt="" height="200px"> {% endif %}</div>
+                    <h2 class="m-b-0">{{user.name}}</h2>
+                    <h6 class="m-b-0">@{{user.username}}</h6>
+                    <h6 class="m-b-0">CRUSHES: {{user.crushed.count}}</h6>
+                    <h6 class="m-b-0">CRYPTO OWNED:{{user.crypto_owned}}</h6>
+                    <p>{{user.desc}}</p>
+
+                    {% if user.is_login  %}
+                    <a href={% url 'tagrequests' pk=user.id %}> <button class="btn btn-outline-info">  Tag Requests </button></a>
+                      {% if user.is_admin %}
+                        <a href={% url 'update_customer' pk=user.id %}> <button class="btn btn-outline-info">  Update </button></a>
+                      {% else %}
+                      <a href={% url 'customer_update' pk=user.id %}> <button class="btn btn-outline-info">  Update </button></a>
+
+                      {% endif %}
+                    {% endif %}
+
+                 {% if user.is_admin %}
+                    <a href={% url 'delete_customer' pk=user.id %}><button class="btn btn-outline-info">  Delete User </button></a>
+                    {% if user.is_block == True %}
+                         <a href={% url 'unblockcustomer' pk=customer.id %}><button class="btn btn-outline-info">  Unblock Customer</button></a>
+
+                    {% else %}
+
+                        <a href={% url 'block_customer' pk=user.id %}><button class="btn btn-outline-info">  Block User </button></a>
+                    {% endif %}
+                 {% endif %}
+
+
+                <div class="row text-center m-t-20">
+
+                    <div class="col-lg-4 col-md-4 m-t-20">
+                        <h3 class="m-b-0 font-light"><a href={% url 'follower_list' pk=user.id %}>{{user.followers.count}}</a></h3><small>Followers</small>
+                    </div>
+                <div class="col-lg-4 col-md-4 m-t-20">
+                <h3 class="m-b-0 font-light">{{user.email}}</h3><small>AssosiatedEmail</small>
+              </div>
+
+              <div class="col-lg-4 col-md-4 m-t-20">
+                  <h3 class="m-b-0 font-light"><a href={% url 'following_list' pk=user.id %}>{{user.followings.count}}</a></h3><small>Following</small>
+              </div>
+
+              <div class="col-lg-4 col-md-4 m-t-20">
+                      <h3 class="m-b-0 font-light">{{user.phone}}</h3><small>Phone</small>
+              </div>
+
+              <div class="col-lg-4 col-md-4 m-t-20">
+                      <h3 class="m-b-0 font-light">{{user.address}}</h3><small>HomeAddress</small>
+              </div>
+
+              <div class="col-lg-4 col-md-4 m-t-20">
+                      <h3 class="m-b-0 font-light">Rs.{{user.money_owned}}</h3><small>MoneyOwned</small>
+              </div>
+
+                </div>
+                <hr>
+                {% for post in posts %}
+                  {% if post.is_block == False or user.is_admin %}
+
+
+                    <a href={% url 'post_detail' pk=post.pk %}><img src={{post.profile_image.url}} alt="post" height="200px"></a>
+                    {% if forloop.counter|divisibleby:3 %}
+                      <br>
+
+                    {% endif %}
+                  {% endif %}
+
+                {% endfor %}
+
+                <br><hr>
+
+
+
+
+                <br>
+                SHOP DETAILS:
+                <table>
+                  <tr>
+                    <td>Product</td>
+                    <td>Category</td>
+                    <td>Date ordered</td>
+
+                    <td>Order address</td>
+                    <td>Seller Name</td>
+                    <td>Seller Shop Address</td>
+                    <td> Price </td>
+                    <td>STATUS</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <br>
+                  {% for order in orders %}
+                  {% if order.customer == user and order.is_block == False or user.is_admin %}
+                  <tr>
+                    {% if order.product != None %}
+                    <td> <a href={% url 'order_detail' pk=order.pk %}>{{order.product.name}}</a></td>
+                    {% else %}
+                    <td>Deleted</td>
+                    {% endif %}
+                    <td>{{order.product.category}}</td>
+                    <td>{{order.date_created}}</td>
+
+                    <td>{{order.address}}</td>
+                    {% if order.seller != None %}
+                    <td><a href={% url 'seller_detail' pk=order.seller.pk %}>{{order.seller.username}}</a></td>
+                    <td>{{order.seller.shop_address}}</td>
+                    {% else %}
+                    <td>Deleted</td>
+                    <td></td>
+                    {% endif %}
+                    {% if order.price != None %}
+                    <td>{{order.product.price}}</td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                    {% if order.status != None %}
+                    <td>{{order.status}}</td>
+                    {% else %}
+                    <td>Deleted</td>
+                    {% endif %}
+                    {% if user.is_admin %}
+                    <td> <a href={% url 'order_update' pk=order.id %}><button class="btn btn-outline-info">  Update  </button></a></td>
+                    <td> <a href={% url 'delete_order' pk=order.id %}><button class="btn btn-outline-info">  Delete  </button></a></td>
+                    {% if order.is_block %}
+                     <td><a href={% url 'unblockorder' pk=order.id %}><button class="btn btn-outline-info">UnBlock</button></a></td>
+                    {% else %}
+                    <td> <a href={% url 'block_order' pk=order.id %}><button class="btn btn-outline-info">  Block  </button></a></td>
+                    {% endif %}
+
+                    {% endif %}
+
+
+                    {% endif %}
+
+                  </tr>
+
+                  {% endfor %}
+
+                </table>
+
+
+
+                <br>
+                <hr>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+{% endblock %}

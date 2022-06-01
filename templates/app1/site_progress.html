@@ -1,0 +1,61 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+<table>
+  <tr>
+    <td>Total Orders</td>
+    <td>Orders Delivered</td>
+    <td>Order Pending</td>
+    <td>Total Customers</td>
+    <td>Total Sellers</td>
+
+  </tr>
+
+  <tr>
+    <td>{{no_of_orders}}</td>
+    <td>{{orders_delivered.count}}</td>
+    <td>{{orders_pending.count}}</td>
+    <td>{{no_of_users}}</td>
+    <td>{{no_of_sellers}}</td>
+  </tr>
+</table>
+
+Pending Order Table:
+
+<table>
+  <tr>
+    <td>Product</td>
+    <td>Category</td>
+    <td>Date ordered</td>
+    <td>Customer Name</td>
+    <td>Customer address</td>
+    <td>Seller Name</td>
+    <td>Seller Shop Address</td>
+    <td> Price </td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  {% for order in orders_pending %}
+  <tr>
+    <td> <a href={% url 'order_detail' pk=order.product.pk %}>{{order.product.name}}</a></td>
+    <td>{{order.product.category}}</td>
+    <td>{{order.date_created}}</td>
+    <td><a href={% url 'customer_detail' pk=order.customer.pk %}>{{order.customer.username}}</a></td>
+    <td>{{order.customer.address}}</td>
+    <td><a href={% url 'seller_detail' pk=order.seller.pk %}>{{order.seller.username}}</a></td>
+    <td>{{order.seller.shop_address}}</td>
+    <td>{{order.product.price}}</td>
+    <td> <a href={% url 'update_order' pk=order.id %}>Update</a></td>
+    <td> <a href={% url 'delete_order' pk=order.id %}>Delete</a></td>
+    {% if order.is_block %}
+    <td> <a href={% url 'unblock_order' pk=order.id %}>UnBlock</a></td>
+    {% else %}
+    <td> <a href={% url 'block_order' pk=order.id %}>Block</a></td>
+    {% endif %}
+
+  </tr>
+  {% endfor %}
+</table>
+    {% endblock %}

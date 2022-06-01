@@ -1,0 +1,74 @@
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4"><h3><strong>Customers</strong></h3></div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            {% for rating in ratings %}
+            {% if forloop.counter < 10 %}
+            <div class="col-lg-4">
+
+                <div class="text-center card-box">
+
+                    <div class="member-card pt-2 pb-2">
+
+                        <div class="thumb-lg member-thumb mx-auto"><img src={{rating.author.profile_image.url}} class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                            <h4>{{rating.author.name}}</h4>
+                         <p class="text-muted"><span class="text-pink">@{{rating.author.username}}</span></p>
+                        </div>
+                        <ul class="social-links list-inline">
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+                      <a href="#">  <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message </button></a>
+                        <a href={% url 'customer_detail' pk=rating.author.id %}>  <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Visit Profile</button></a>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>{{rating.author.crypto_owned}}</h4>
+                                        <p class="mb-0 text-muted">Crypto</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>{{rating.author.followers.count}}</h4>
+                                        <p class="mb-0 text-muted">Followers</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mt-3">
+                                        <h4>{{rating.author.followings.count}}</h4>
+                                        <p class="mb-0 text-muted">Following</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end col -->
+
+            <!-- end col -->
+
+
+            {% endif %}
+
+            {% endfor %}
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+
+
+    </div>
+    <!-- container -->
+</div>

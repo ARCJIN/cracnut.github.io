@@ -1,0 +1,97 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% if user.is_login %}
+
+
+<link rel="stylesheet" href={% static 'css/clubsdesign.css'%} >
+<script src={% static 'js/chatbox.js' %}>
+  </script>
+
+
+
+
+
+
+
+  <div class="container mt-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-6">
+              <div class="p-3 bg-white text-center">
+                  <div><img src="https://i.imgur.com/yFeV2ed.png">
+                      <h2>Clubs </h2>
+                      <form class="d-flex" method=POST action={% url 'clubsearchlist'%} >
+                        {% csrf_token %}
+                      <a href={% url 'addclub' %}><i class="fa fa-plus" style="font-size:36px"></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button class="fa fa-search" type="submit"></button>&nbsp&nbsp
+
+                      <div class="navigation-search-container">
+
+
+
+                          <input id="h1" class="form-control me-2" type="text" placeholder="Search" aria-label="Search"  name="searched">
+
+                        </form>
+
+                  </div><br>
+
+
+
+
+                  {% for following in clubs %}
+                    {% if forloop.counter < 20 %}
+
+                  <div class="d-flex flex-row justify-content-between align-items-center">
+                    {% if user in following.members.all %}
+                      <div class="d-flex flex-row align-items-center"><img class="rounded-circle" src={{following.profile_image.url}} width="55" height="55">
+                    {% else %}
+                      <div class="d-flex flex-row align-items-center"> <a href={% url 'chatbox_detail' pk=following.id %}><img class="rounded-circle" src={{following.profile_image.url}} width="55" height="55"></a>
+                    {% endif %}
+                          <div class="d-flex flex-column align-items-start ml-2"><span class="font-weight-bold">&nbsp@&nbsp{{following.name}}</span><span class="followers">{{following.members.count}} Members</span></div>
+
+                      </div>
+                      {% if following.is_private and user not in following.members.all and following.fees_to_enter != 0 %}
+                      <div class="d-flex flex-row align-items-center mt-2">   <a href={% url 'chatbox_detail' pk=following.id %}><button class="btn btn-outline-success">  +Pay </button></a> </div>
+                      {% else %}
+                      <div class="d-flex flex-row align-items-center mt-2">   <a href={% url 'clubpassword' pk=following.id %}><button class="btn btn-outline-success">  Join </button></a> </div>
+                      {% endif %}
+
+
+                  </div><br>
+                  {% endif %}
+
+                  {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+<h2>YOU need to login first</h2>
+{% endif%}
+
+
+{% endblock %}

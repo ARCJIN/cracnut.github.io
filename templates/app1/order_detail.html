@@ -1,0 +1,205 @@
+
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/detailtoorder.css'%} >
+
+{% if user.is_login %}
+
+
+
+
+
+
+
+<div class="post">
+    <div class="info">
+        <div class="user">
+          <!--  <div class="profile-pic"><a href={% url 'seller_detail' pk=order.product.seller.id %}><img class="rounded-circle" src={{order.product.seller.profile_image.url}} height="45" width="45"></a></div> -->
+          <div class="profile-pic"><img class="rounded-circle" src={{order.product.seller.profile_image.url}} height="45" width="45"></div>
+        <!--    <p class="username">&nbsp{{order.product.seller.username}} (<a href={% url 'seller_detail' pk=order.product.seller.id %}>{{order.product.seller.email}}</a>) </p> -->
+        <p class="username">&nbsp{{order.product.seller.username}} ({{order.product.seller.email}}) </p>
+            <p class="username">&nbsp[{{order.product.name}} {{order.product.category}} Size {{order.product.size}} x ({{order.product.quantity}})</p>
+
+        </div>
+        ...
+
+
+    </div>
+
+    <div class="landscape">
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" align="center">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        <a href={% url 'product_detail' pk=order.product.id %}>
+        <div class="carousel-inner" width=180%>
+          <div class="carousel-item active">
+            <img src={{order.product.profile_image1.url}}  class="d-block w-50" height=200px alt="...">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+          </div>
+          <div class="carousel-item">
+             <img src={{order.product.profile_image2.url}}  class="d-block w-50" alt="..." height=200px>
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src={{order.product.profile_image3.url}}  class="d-block w-50" alt="..." height=200px>
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+          </div>
+
+          <div class="carousel-item">
+          <img src={{order.product.profile_image4.url}}  class="d-block w-50" alt="..." height=200px>
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src={{order.product.profile_image5.url}}  class="d-block w-50" alt="..." height=200px>
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+          </div>
+
+        </div></a>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="post-content">
+        <div class="reaction-wrapper">
+
+
+
+
+
+
+
+
+
+
+                        {% if user.is_admin %}
+                           <a href={% url 'order_update' pk=order.id %}><span class="fa fa-edit"></span></a>&nbsp&nbsp&nbsp
+                        {% else %}
+                        {% if user.is_seller and order.product.seller == user %}
+                        <a href={% url 'order_update' pk=order.id %}><span class="fa fa-edit"></span></a>&nbsp&nbsp
+                        {% endif %}
+                        {% endif %}
+
+                        {% if order.product.seller == user or user.is_admin %}
+                         <a href={% url 'delete_order' pk=order.id %}><span class="fa fa-trash-o"></span></a>&nbsp&nbsp&nbsp
+                        {% endif %}
+
+
+
+                        {% if user.is_admin %}
+
+                           {% if order.is_block == True %}
+                              <a href={% url 'unblockorder' pk=order.id %}><span class="fa fa-unlock"></span></a>&nbsp&nbsp&nbsp
+
+                           {% else %}
+
+                               <a href={% url 'block_order' pk=order.id %}><span class="fa fa-ban"></span></a>&nbsp&nbsp&nbsp&nbsp
+                           {% endif %}
+                        {% endif %}
+{% if user.is_customer %}
+<form class="" action="" method="POST">
+  {% csrf_token %}
+  {% if order.order_status == "Cancelled" %}
+  {% else %}
+  {% if ordertime %}
+    <button type="submit" name="returnbutton" class="btn btn-outline-danger">Return Order</button> &nbsp
+    <input type="hidden" name="name" value={{order.id}}>
+  {% else %}
+  {% endif %}
+  {% endif %}
+</form>
+
+{% if bagid.item_in_bag %}
+ <button type="button" class="btn btn-outline-danger">Already added to cart</button>
+{% else %}
+
+<form class="" name="addtocart" action="" method="POST">
+  {% csrf_token %}
+  <a href={% url 'ibag' %}> <button type="submit" name="addtocart" class="btn btn-outline-danger">Add to Bag</button></a>
+  <input type="hidden" name="name" value={{order.product.id}}>
+  &nbsp <b>x Quantity</b> <input type="number" min="1" value="1" name="quantity" >
+</form>
+{% endif %}
+
+
+
+{% endif %}
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <p class="likes">
+            Likes: {% if user.is_seller and order.product.seller == user or user.is_admin %}<a href={% url 'productlikelist' pk=order.product.id %}>{{order.product.likers.all.count}}</a> {% else %}{{order.product.likers.all.count}}{% endif %} +  Price: Rs {{order.product.price}} + Material: {{order.product.material}} + Color: {{order.product.colour}}</p>
+        <p class="post-time">Transaction and Delivery Status: {{order.status}} & {{order.order_status}}</p>
+          <p class="post-time">Ordered Quantity x {{order.quantity}}</p>
+      <!--  <p class="post-time">Customer: <a href={% url 'customer_detail' pk=order.customer.id %}>{{order.customer.username}}</a></p> -->
+        <p class="post-time">Customer:{{order.customer.username}}</p>
+        <p class="post-time">{% if order.is_transaction_successfull %}<span id="t1">Transactiion Successful</span>{% else %} {% if order.is_transaction_successfull == Null %}<span id="t2">Transaction to be verified</span>{% else %}<span id="t3">Transaction to be verified</span>{% endif %}{% endif %} </p>
+        <p class="post-time">Mode of Payment: {{order.mode_of_payment}}</p>
+        <p class="post-time">Address: {{order.address}}</p>
+        <p class="post-time">Order placed at: {{order.date_created}}</p>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+No Selling Activity recorded
+{% endif %}
+
+
+
+{% endblock %}

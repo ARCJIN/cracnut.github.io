@@ -1,0 +1,131 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+{% if user.is_login %}
+
+
+
+
+
+
+<link rel="stylesheet" href={% static 'css/listoffollowing.css' %}>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+<div class="row">
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container mt-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-6">
+              <div class="p-3 bg-white text-center">
+                  <div><img src="https://i.imgur.com/yFeV2ed.png">
+                      <h2>Members</h2><hr>
+                  </div>
+
+
+
+
+                  {% for following in club.members.all %}
+
+                  <div class="d-flex flex-row justify-content-between align-items-center">
+                      <div class="d-flex flex-row align-items-center">  <a href={% url 'customer_detail' pk=following.id %}><img class="rounded-circle" src={{following.profile_image.url}} width="55" height="55"></a>
+                          <div class="d-flex flex-column align-items-start ml-2"><span class="font-weight-bold">&nbsp@&nbsp{{following.username}}</span><span class="followers">{{following.followers.count}} Followers</span></div>
+                      </div>
+                        <div class="d-flex flex-row align-items-right mt-2">   <a href={% url 'transfer' pk=following.id %}> <button class="btn btn-outline-success"> Message </button></a>&nbsp&nbsp&nbsp <a href={% url 'transfer' pk=following.id %}> <button class="btn btn-outline-info">  +Transfer </button></a> &nbsp&nbsp&nbsp
+
+                          {% if user.is_admin or user == club.admin %}
+                          <form class="" action="" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="member" value={{following.id}}>
+                            {% if following in club.elites.all %}
+                              <button type="submit" class="btn btn-outline-danger" name="makeelite"><i class="fa fa-user"></i></button>
+                            {% else %}
+                            <button type="submit" class="btn btn-outline-danger" name="makeelite"><i class="fa fa-user-secret"></i></button>
+                            {% endif %}
+                            {% if following == club.admin %}
+                            {% else %}
+                            <button type="submit" class="btn btn-outline-danger" name="kickout"><i class="fa fa-ban"></i></button>
+                            {% endif %}
+
+                          </form>
+                          </div>
+                          {% endif %}
+
+                  </div><br>
+
+
+                  {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href={% static 'js/follower_list.js' %}>
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+  An error occured, please login again
+
+{% endif %}
+
+
+
+{% endblock %}

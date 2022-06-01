@@ -1,0 +1,20 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+{{msg}}
+<form  action = {% url 'customerlogout'  %} method="POST">
+  {% csrf_token %}
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to logout</span>
+
+        <br>
+        <button class="btn btn-danger" type=submit""> Logout </button><br>
+          <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+    </div>
+</div>
+
+
+</form>
+
+  {% endblock %}

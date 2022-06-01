@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul class="list-group list-group-horizontal-md">
+
+
+
+      Pending Orders
+    {% for order in order_list %}
+        {% if order.status == 'Pending'%}
+
+        <div class="customer">
+
+            <h1><a href="{% url 'order_detail' pk=order.pk %}">Customer:{{ order.customer }}</a></h1>
+
+            <div class="date">
+            </div>
+            <p> </p>
+
+        </div>
+          {% endif %}
+
+      {% endfor %}
+<br> <hr>
+
+Out For Delivery:
+      {% for order in order_list %}
+          {%if order.status == 'Out for delivery'%}
+
+          <div class="customer">
+
+              <h1><a href="{% url 'order_detail' pk=order.pk %}">Customer:{{ order.customer }}</a></h1>
+
+              <div class="date">
+                  <p> </p>
+              </div>
+
+          </div>
+          {% endif %}
+
+        {% endfor %}
+<br> <hr>
+
+
+
+
+
+
+Delivered
+      {% for order in order_list %}
+          {%if order.status == 'Delivered'%}
+
+          <div class="customer">
+
+              <h1><a href="{% url 'order_detail' pk=order.pk %}">Customer:{{ order.customer }}</a></h1>
+
+              <div class="date">
+                  <p> </p>
+              </div>
+
+          </div>
+          {% endif %}
+
+        {% endfor %}
+<br> <hr>
+
+
+
+
+
+Cancelled
+      {% for order in order_list %}
+          {%if order.status == 'Cancelled'%}
+
+          <div class="customer">
+
+              <h1><a href="{% url 'order_detail' pk=order.pk %}">Customer:{{ order.customer }}</a></h1>
+
+              <div class="date">
+                  <p> </p>
+              </div>
+
+          </div>
+          {% endif %}
+
+        {% endfor %}
+<br> <hr>
+
+
+
+
+
+
+
+
+
+
+
+Active for Refund:
+      {% for order in order_list %}
+          {%if order.status == 'Refund Request Active'%}
+
+          <div class="customer">
+
+              <h1><a href="{% url 'order_detail' pk=order.pk %}">Customer:{{ order.customer }}</a></h1>
+
+              <div class="date">
+                  <p> </p>
+              </div>
+
+          </div>
+          {% endif %}
+
+        {% endfor %}
+<br> <hr>
+
+
+
+
+
+
+
+
+
+
+Successful Refund:
+      {% for order in order_list %}
+          {%if order.status == 'Refund Successful'%}
+
+          <div class="customer">
+
+              <h1><a href="{% url 'order_detail' pk=order.pk %}">Customer:{{ order.customer }}</a></h1>
+
+              <div class="date">
+                  <p> </p>
+              </div>
+
+          </div>
+          {% endif %}
+
+        {% endfor %}
+<br> <hr>
+</body>
+</html>

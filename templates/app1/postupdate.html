@@ -1,0 +1,88 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/postupdate.css'%}>
+
+{% if user.is_login %}
+  {% if post.is_block == False %}
+    {% if user == customer or user.is_admin %}
+
+
+
+
+    <div class="container" >
+
+      <form class="well form-horizontal" action="" method="POST"  id="contact_form">
+  <fieldset>
+{% csrf_token %}
+  <!-- Form Name -->
+  <legend><center><h2><b>Edit Your Post</b></h2></center></legend><br>
+  <legend><center><h5><b>"Burn to Earn"</b></h5></center></legend><br>
+
+  <!-- Text input-->
+  @{{post.creator.username}}
+  <br>
+  <a href={% url 'customer_detail' pk=post.creator.id %}><img src={{post.creator.profile_image.url}} alt="Post creator Photo" height=100px ></a><hr>
+  <br>
+  <a href={% url 'post_detail' pk=post.id %}><img src={{post.profile_image.url}} alt="Post Photo" height=200px ></a>
+
+<br>
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="desc" placeholder="Post Description" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Button -->
+  <div class="form-group" align="center">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4"><br>
+      &nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUPDATE <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+  </div>
+
+
+
+
+<link rel="stylesheet" href={% static 'js/customerlogin.js' %}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+      You are not Authenticated to complete this task
+    {% endif %}
+
+
+  {% else %}
+      The Functions on this customer are blocked due to INAPPROPRIATE ACTIONS
+  {% endif %}
+
+{% else %}
+  You need to login first
+{% endif %}
+
+{% endblock %}

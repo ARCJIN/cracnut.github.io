@@ -1,0 +1,12 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+This is Site Data Page
+
+
+<a href={% url 'order_list'%}> Orders </a>
+<a href={% url 'customer_list'%}> Customers </a>
+<a href={% url 'seller_list'%}> Seller </a>
+
+    {% endblock %}

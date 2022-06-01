@@ -1,0 +1,239 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/add_customer.css'%}>
+
+{% if user.is_login %}
+  {% if seller.is_block == False %}
+    {% if user.is_admin %}
+
+
+
+  <h3>  @{{seller.username}}<br></h3>
+    <a href={% url 'seller_detail' pk=seller.id %}><img src={{seller.profile_image.url}} alt="Seller Profile photo" height=200px ></a>
+    <div class="container" >
+
+      <form class="well form-horizontal" action="" method="POST"  id="contact_form" enctype="multipart/form-data">
+  <fieldset>
+{% csrf_token %}
+  <!-- Form Name -->
+  <legend><center><h2><b>Update Yourself</b></h2></center></legend><br>
+  <legend><center><h5><b>Edit whatever you want </b></h5></center></legend><br>
+
+  <!-- Text input-->
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="name" placeholder="Name" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Text input-->
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="contactnumber" placeholder="ContactNumber" class="form-control"  type="phone">
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="password" placeholder="Password" class="form-control"  type="password">
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input-->
+
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="shop_address" placeholder="Shop Address" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Text input-->
+
+  <div class="form-group" align = "center">
+    <label class="col-md-4 control-label" ></label>
+      <div class="col-md-4 inputGroupContainer" >
+      <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input name="home_address" placeholder="Home Address" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Text input-->
+
+
+      <div class="form-group" align = "center">
+        <label class="col-md-4 control-label" ></label>
+          <div class="col-md-4 inputGroupContainer" >
+          <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input id='image' name="profile_image" placeholder="Profile_image" class="form-control"  type="file">
+          </div>
+        </div>
+      </div>
+
+  <!-- Text input-->
+
+{% if user.is_admin %}
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input id='crypto_owned' name="crypto_owned" placeholder="CryptoOwned" class="form-control"  type="number">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input id='money_owned' name="money_owned" placeholder="MoneyOwned" class="form-control"  type="number">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+Certify? <br>
+  True:<input id='True' name="is_certified" placeholder="" class="form-control"  type="radio" value=True>
+  False:<input id='False' name="is_certified" placeholder="" class="form-control"  type="radio" value=False>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-group" align = "center">
+  <label class="col-md-4 control-label" ></label>
+    <div class="col-md-4 inputGroupContainer" >
+    <div class="input-group">
+admin? <br>
+  True:<input id='True' name="is_admin" placeholder="IsAdmin?" class="form-control"  type="radio" value=True>
+  False:<input id='False' name="is_admin" placeholder="IsAdmin?" class="form-control"  type="radio" value=False>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+{% endif %}
+
+  <!-- Button -->
+  <div class="form-group" align="center">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4"><br>
+      &nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUPDATE <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+  </div>
+      </div>
+
+
+
+<link rel="stylesheet" href={% static 'js/customerlogin.js' %}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+      You are not Authenticated to complete this task
+    {% endif %}
+
+
+  {% else %}
+      The Functions on this customer are blocked due to INAPPROPRIATE ACTIONS
+  {% endif %}
+
+{% else %}
+  You need to login first
+{% endif %}
+
+{% endblock %}

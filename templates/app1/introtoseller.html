@@ -1,0 +1,201 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/customer_detail.css'%}>
+
+{% if user.is_login %}
+
+
+
+
+
+
+
+
+
+
+
+<div class="padding">
+
+
+   <div class="col-md-10">
+       <!-- Column -->
+       <div class="card">
+           <div class="card-body little-profile text-center">
+               <div class="pro-img">{% if user.profile_image %} <img src={{user.profile_image.url}} alt="" height="200px"> {% endif %}</div>
+               <h2 class="m-b-0">{{user.name}}</h2>
+               <h6 class="m-b-0">@{{user.username}}</h6>
+
+
+               <p>{{user.desc}}</p>
+
+               {% if user.is_login  %}
+                 {% if user.is_admin %}
+                   <a href={% url 'update_seller' pk=user.id %}> <button class="btn btn-outline-info">  Update </button></a>
+                 {% else %}
+                 <a href={% url 'seller_update' pk=user.id %}> <button class="btn btn-outline-info">  Update</button></a>
+                 {% endif %}
+               {% endif %}
+
+            {% if user.is_admin %}
+               <a href={% url 'delete_seller' pk=user.id %}><button class="btn btn-outline-info">  Delete Seller</button></a>
+               {% if user.is_block == True %}
+                   <a href={% url 'unblockseller' pk=user.id %}><button class="btn btn-outline-info">  Unblock Seller </button></a>
+
+               {% else %}
+
+                   <a href={% url 'block_seller' pk=user.id %}><button class="btn btn-outline-info">  Block Seller</button></a>
+               {% endif %}
+            {% endif %}
+
+
+           <div class="row text-center m-t-20">
+
+
+             <div class="col-lg-4 col-md-4 m-t-20">
+                     <h3 class="m-b-0 font-light">{{user.home_address}}</h3><small>HomeAddress</small>
+             </div>
+
+
+
+           <div class="col-lg-4 col-md-4 m-t-20">
+           <h3 class="m-b-0 font-light">{{user.email}}</h3><small>AssosiatedEmail</small>
+         </div>
+
+
+         <div class="col-lg-4 col-md-4 m-t-20">
+             <h3 class="m-b-0 font-light">{{user.shop_address}}</h3><small>Shop Address</small>
+         </div>
+
+
+         <div class="col-lg-4 col-md-4 m-t-20">
+             <h3 class="m-b-0 font-light">{{user.crypto_owned}}</h3><small>CryptoOwned</small>
+         </div>
+
+         <div class="col-lg-4 col-md-4 m-t-20">
+                 <h3 class="m-b-0 font-light">{{user.phone}}</h3><small>Phone</small>
+         </div>
+
+
+
+         <div class="col-lg-4 col-md-4 m-t-20">
+                 <h3 class="m-b-0 font-light">Rs.{{user.money_owned}}</h3><small>MoneyOwned</small>
+         </div>
+
+           </div>
+           <hr>
+           {% for post in posts %}
+             {% if post.creator == user %}
+               <a href={% url 'post_detail' pk=post.pk %}><img src={{post.profile_image.url}} alt="" height="200px"></a>
+             {% endif %}
+
+           {% endfor %}
+
+           <br><hr>
+
+
+
+
+           <br>
+           SHOP DETAILS:
+           <table>
+             <tr>
+               <td>Product</td>
+               <td>Category</td>
+               <td>Date ordered</td>
+
+               <td>Order address</td>
+               <td>Customer Name</td>
+               <td>Seller Shop Address</td>
+               <td> Price </td>
+               <td>STATUS</td>
+               <td></td>
+               <td></td>
+               <td></td>
+             </tr>
+             <br>
+             {% for order in orders %}
+             {% if order.seller == user %}
+             <tr>
+               {% if order.product != None %}
+               <td> <a href={% url 'order_detail' pk=order.pk %}>{{order.product.name}}</a></td>
+               {% else %}
+               <td>Deleted</td>
+               {% endif %}
+               <td>{{order.product.category}}</td>
+               <td>{{order.date_created}}</td>
+
+               <td>{{order.address}}</td>
+               {% if order.seller != None %}
+               <td><a href={% url 'customer_detail' pk=order.customer.pk %}>@{{order.customer.username}}</a></td>
+               <td>{{order.seller.shop_address}}</td>
+               {% else %}
+               <td>Deleted</td>
+               {% endif %}
+
+               <td>{{order.product.price}}</td>
+               <td>{{order.status}}</td>
+               {% if user.is_admin or user.is_seller %}
+               <td> <a href={% url 'order_update' pk=order.id %}><button class="btn btn-outline-info">  Update  </button></a></td>
+               {% if user.is_admin %}
+               <td> <a href={% url 'delete_order' pk=order.id %}><button class="btn btn-outline-info">  Delete  </button></a></td>
+               {% if order.is_block %}
+               <td> <a href={% url 'unblockorder' pk=order.id %}><button class="btn btn-outline-info">  UnBlock  </button></a></td>
+               {% else %}
+               <td> <a href={% url 'block_order' pk=order.id %}><button class="btn btn-outline-info">  Block  </button></a></td>
+               {% endif %}
+               {% endif %}
+
+               {% endif %}
+
+
+               {% endif %}
+
+             </tr>
+
+             {% endfor %}
+
+           </table>
+
+
+
+           <br>
+           <hr>
+
+
+</div>
+</div>
+{% for product in products %}
+
+    <a href={% url 'product_detail' pk=product.pk %}><img src={{product.profile_image1.url}} alt="Product photo" height="200px"></a>
+
+
+{% endfor %}
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+Seller needs to login
+{% endif %}
+{% endblock %}

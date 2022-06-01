@@ -1,0 +1,112 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% if user.is_login %}
+
+{% load static %}
+<!-- JavaScript Bundle with Popper -->
+
+
+<link rel="stylesheet" href={% static 'css/stag.css' %}>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container" id="container">
+
+  <div class="form-container sign-in-container">
+    <form  action="" method="POST"  id="contact_form">
+      {% csrf_token %}
+      <h3>Tag Requests</h3> <br>
+      <span>Tagging helps to connect post with accounts</span>
+<br>
+
+
+          <input type=list name="p1" id="p1">
+
+
+
+          <input list="persons" name="p2" id="p2">
+
+
+
+          <input list="persons" name="p3" id="p3">
+
+
+
+          <input list="persons" name="p4" id="p4">
+
+
+
+
+
+          <input list="persons" name="p5" id="p5">
+
+
+
+      <button type="submit" >Tag</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+
+      <div class="overlay-panel overlay-right">
+        <h1>Hola Amigo!</h1>
+        <p>Tag 5 Accounts who aren't already tagged upon the given Post</p>
+        <p>This will help to increase reach of content to followers of tagged accounts</p>
+        <p>Crypto Units will be awarded upon successful Tag</p>
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+
+{% else %}
+  You need to login
+
+{% endif %}
+
+
+
+{% endblock %}

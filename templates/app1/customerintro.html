@@ -1,0 +1,325 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/customerdetail.css' %}>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+
+{% if user.is_login %}
+
+
+
+
+
+
+
+<header>
+<!--
+	<div class="container">
+
+		<div class="profile">
+
+			<div class="profile-image">
+
+				{% if user.profile_image %} <img src={{user.profile_image.url}} alt="Error in Profile Photo" height="200px" width="200px"> {% else %} <img src=https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png alt="" height="200px"> {% endif %}
+
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name">@{{user.username}}</h1>
+				--><br>
+				<br>
+				{% if user.is_admin or user %}
+
+					<a href={% url 'update_customer' pk=user.id %}><button class="btn profile-edit-btn">  Edit Profile</button></a>
+				{% else %}
+
+
+				{% endif %}
+				<!--
+				{% if user.is_admin or user %}
+				 <a href={% url 'tagrequests' pk=user.id %}> <button class="btn profile-edit-btn">  Tags </button></a>
+
+				 {% else %}
+
+
+				 {% endif %}
+
+			<table>
+
+				<tr>
+					{% if user.is_admin %}
+					{% if user.is_private == False or user.is_private == Null %}
+				<td><a href={% url 'private' %}><button class="btn profile-edit-btn">  Go Private </button></a></td>
+				{% else %}
+				<td><a href={% url 'public' %}><button class="btn profile-edit-btn">  Go Public </button></a></td>
+				{% endif %}
+				{% endif %}
+					<td>{% if user.is_admin %}
+             <a href={% url 'delete_customer' pk=user.id %}><button class="btn profile-edit-btn">  Delete</button></a>
+
+
+          {% endif %}</td>
+					<td>{% if user.is_admin %}
+
+             {% if customer.is_block == True %}
+                  <a href={% url 'unblockcustomer' pk=user.id %}><button class="btn profile-edit-btn">  Unblock</button></a>
+
+             {% else %}
+
+                 <a href={% url 'block_customer' pk=user.id %}><button class="btn profile-edit-btn">  Block </button></a>
+             {% endif %}
+
+          {% endif %}</td>
+
+				</tr>
+			</table>
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="profile-stats">
+
+				<table>
+					<tr>
+						<td><li><span class="profile-stat-count">{{x}}</span> Posts</li></td>
+						<td><li><span class="profile-stat-count"><a href={% url 'follower_list' pk=user.id %}>{{user.followers.count}}</a></span> Followers</li></td>
+						<td><li><span class="profile-stat-count"><a href={% url 'following_list' pk=user.id %}>{{user.followings.count}}</a></span> Following</li></td>
+					</tr>
+					{% if  user  or user.is_admin %}
+
+
+
+
+
+					<tr>
+						<td>{% if user.is_admin %}<a href={% url 'crushlist' %}><li><span class="profile-stat-count">{{user.crushed.count}}</span> Crush</li></a>{% else %}<li><span class="profile-stat-count">{{user.crushed.count}}</span> Crush</li>{% endif %}</td>
+						<td><li><span class="profile-stat-count">{{user.money_owned}}</span> Money</li></td>
+						<td><li><span class="profile-stat-count">{{user.crypto_owned}}</span> Crypto</li></td>
+					</tr>
+
+					{% endif %}
+				</table>
+
+
+
+
+			</div>
+<br>
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name"></span> {{user.desc}}</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+
+
+<!--
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+
+
+
+
+			{% for post in posts %}
+				{% if post.is_block == False or user.is_admin %}
+
+			<a href={% url 'post_detail' pk=post.pk %}>
+				<div class="gallery-item" tabindex="0">
+
+					<img src={{post.profile_image.url}} alt="post" height="285px" width="280px">
+
+					<div class="gallery-item-info">
+						<ul>
+							<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fa fa-heart" aria-hidden="true"></i> {{post.likers.count}}</li>
+							<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fa fa-comment" aria-hidden="true"></i>{{post.num_of_comments}}</li>
+						</ul>
+
+
+
+
+					</div>
+
+				</div></a>
+
+				{% endif %}
+
+			{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+		<!-- End of gallery -->
+		<!--
+		{% if x == 0 %}
+		<a href={% url 'home' %}><i class="fa fa-camera" aria-hidden="true" style="font-size:256px"></i></a>
+		<br>
+
+		{% endif %}
+-->
+
+	</div>
+	<!-- End of container -->
+	{% if user %}
+	<section>
+	  <!--for demo wrap-->
+	  <h2>Order Details</h2>
+	  <div class="tbl-header">
+	    <table cellpadding="0" cellspacing="0" border="0">
+	      <thead>
+	        <tr>
+	          <th>Product</th>
+	          <th>Category</th>
+	          <th>Date Ordered</th>
+	          <th>Order Address</th>
+	          <th>Seller Name</th>
+	          <th>Seller Shop Address</th>
+	          <th>Price</th>
+	          <th>Status</th>
+	          <th></th>
+	          <th></th>
+	          <th></th>
+	        </tr>
+	      </thead>
+	    </table>
+	  </div>
+	  <div class="tbl-content">
+	    <table cellpadding="0" cellspacing="0" border="0">
+	      <tbody>
+	        {% for order in orders %}
+	        {% if order.customer == user and order.is_block == False or user.is_admin %}
+	        <tr>
+	          {% if order.product != None %}
+	          <td> <a href={% url 'order_detail' pk=order.pk %}>{{order.product.name}}</a></td>
+	          {% else %}
+	          <td>Deleted</td>
+	          {% endif %}
+
+
+	          <td>{{order.product.category}}</td>
+	          <td>{{order.date_created}}</td>
+
+	          <td>{{order.address}}</td>
+
+
+	          {% if order.customer != None %}
+	        <!--  <td><a href={% url 'seller_detail' pk=order.seller.pk %}>{{order.seller.username}}</a></td>  -->
+					<td>{{order.seller.username}}</td>
+	          <td>{{order.seller.shop_address}}</td>
+	          {% else %}
+	          <td>Deleted</td>
+	          <td></td>
+	          {% endif %}
+
+
+
+	          {% if order.price != None %}
+	          <td>{{order.product.price}}</td>
+	          {% else %}
+	          <td>{{order.product.price}}</td>
+	          {% endif %}
+
+
+	          {% if order.status != None %}
+	          <td>{{order.status}}</td>
+	          {% else %}
+	          <td>Deleted</td>
+	          {% endif %}
+
+
+
+
+	          {% if user.is_admin or user.is_seller %}
+	          {% if order.product != None and order.product.seller != None %}
+	          <td> <a href={% url 'order_update' pk=order.id %}><button  class="btn profile-edit-btn">  Update  </button></a></td>
+	          <td> <a href={% url 'delete_order' pk=order.id %}><button  class="btn profile-edit-btn">  Delete  </button></a></td>
+	          {% if order.is_block %}
+	           <td><a href={% url 'unblockorder' pk=order.id %}><button  class="btn profile-edit-btn">UnBlock</button></a></td>
+	          {% else %}
+	          <td> <a href={% url 'block_order' pk=order.id %}><button  class="btn profile-edit-btn">  Block  </button></a></td>
+	          {% endif %}
+	          {% endif %}
+	          {% else %}
+	          <td>     {{order.mode_of_payment}}   </td>
+	          <td>   Payment: {{order.is_transaction_successfull}}    </td>
+	          <td>     Status: {{order.order_status}}     </td>
+	          {% endif %}
+
+
+	        </tr>
+	        {% endif %}
+	        {% endfor %}
+	      </tbody>
+	    </table>
+	  </div>
+	</section>
+
+	{% endif %}
+
+
+</main>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href={% static 'js/customerintro.js' %}>
+{% else %}
+You need to login to continue
+<a href={% url 'customer_login' %}>Login</a>
+
+{% endif %}
+{% endblock %}

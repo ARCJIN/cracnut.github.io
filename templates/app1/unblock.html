@@ -1,0 +1,200 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+{% if user.is_admin or user == item.seller %}
+
+  {% if unblockorder %}
+
+
+
+  {{msg}}
+  <form  action = {% url 'unblockorder' item.id %} method="POST">
+    {% csrf_token %}
+  <div class="d-flex justify-content-center align-items-center container">
+      <div class="card py-5 px-3">
+          <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to unblock this order by : <b class="text-danger"><a href={% url 'customer_detail' pk=item.customer.id %}>"@{{item.customer.username}}" ?</a></b></span>
+  <span class="mobile-text">  <a href={% url 'product_detail' pk=item.product.id %}>Product Link</a></span>
+  <span class="mobile-text"> Sold by:<a href={% url 'seller_detail' pk=item.product.seller.id %}> {{item.product.seller.username}}</a></span>
+          <br>
+          <button class="btn btn-danger" type=submit""> Confirm UnBlock </button><br>
+            <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+      </div>
+  </div>
+
+
+  </form>
+
+
+{% else %}
+
+{% endif %}
+
+
+
+
+
+{% if unblockseller %}
+
+
+
+{{msg}}
+<form  action = {% url 'unblockseller' item.id %} method="POST">
+  {% csrf_token %}
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to unblock this Seller  : <b class="text-danger"><a href={% url 'seller_detail' pk=item.id %}>"@{{item.username}}" ?</a></b></span>
+<span class="mobile-text"> Created On: {{item.created_date}}</span>
+
+        <br>
+        <button class="btn btn-danger" type=submit""> Confirm UnBlock </button><br>
+          <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+    </div>
+</div>
+
+
+</form>
+
+
+
+
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+{% if unblockcustomer %}
+
+
+{{msg}}
+<form  action = {% url 'unblockcustomer' item.id %} method="POST">
+  {% csrf_token %}
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to unblock this Customer  : <b class="text-danger"><a href={% url 'customer_detail' pk=item.id %}>"@{{item.username}}" ?</a></b></span>
+<span class="mobile-text"> Created On: {{item.created_date}}</span>
+
+        <br>
+        <button class="btn btn-danger" type=submit""> Confirm UnBlock </button><br>
+          <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+    </div>
+</div>
+
+
+</form>
+
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% if unblockpost %}
+
+
+{{msg}}
+<form  action = {% url 'unblockpost' item.id %} method="POST">
+  {% csrf_token %}
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to unblock this Post by : <b class="text-danger"><a href={% url 'customer_detail' pk=item.creator.id %}>"@{{item.creator.username}}" ?</a></b></span>
+
+        <br>
+        <button class="btn btn-danger" type=submit""> Confirm UnBlock </button><br>
+          <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+    </div>
+</div>
+
+
+</form>
+{% else %}
+the item is not blocked
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% if unblockcomment %}
+
+
+{{msg}}
+<form  action = {% url 'unblockcomment' item.id %} method="POST">
+  {% csrf_token %}
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to unblock this comment by : <b class="text-danger"><a href={% url 'customer_detail' pk=item.creator.id %}>"@{{item.creator.username}}" ?</a></b></span>
+<span class="mobile-text"> Comment: {{item.text}}</span>
+<span class="mobile-text"> Post by:<a href={% url 'customer_detail' pk=item.post.creator.id %}> {{item.post.creator.username}}</a></span>
+        <br>
+        <button class="btn btn-danger" type=submit""> Confirm UnBlock </button><br>
+          <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+    </div>
+</div>
+
+
+</form>
+
+{% else %}
+the item is not blocked
+{% endif %}
+
+
+
+
+
+
+
+
+{% if unblockproduct %}
+
+
+{{msg}}
+<form  action = {% url 'unblockproduct' item.id %} method="POST">
+  {% csrf_token %}
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to unblock this product by : <b class="text-danger"><a href={% url 'seller_detail' pk=item.seller.id %}>"@{{item.seller.username}}" ?</a></b></span>
+
+        <br>
+        <button class="btn btn-danger" type=submit""> Confirm UnBlock </button><br>
+          <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+    </div>
+</div>
+
+
+</form>
+
+{% else %}
+the item is not blocked
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+You need to login first
+{% endif %}
+{% endblock %}

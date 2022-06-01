@@ -1,0 +1,142 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+{% if user.is_login and product.is_block == False %}
+
+
+<link rel="stylesheet" href={% static 'css/xyzreviewlist.css' %}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="post">
+    <div class="info">
+        <div class="user">
+            <div class="profile-pic"><a href={% url 'seller_detail' pk=product.seller.id %}><img class="rounded-circle" src={{product.seller.profile_image.url}} height="45" width="45"></a></div>
+            <p class="username">&nbsp{{product.seller.username}}  </p>
+
+        </div>
+        ...
+    </div>
+    <div class="landscape">
+      <a href={% url 'product_detail' pk=product.id %}><img class="post-image" src={{product.profile_image1.url}} ></a>
+    </div>
+
+    <div class="post-content">
+        <div class="reaction-wrapper">
+
+
+
+            {% if product.seller == user or user.is_admin %}
+            <a href={% url 'delete_product' pk=product.id %}>  <span class="fa fa-trash-o"></span></a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            {% endif %}
+            {% if user.is_admin %}
+            <a href={% url 'product_update' pk=product.id %}>  <span class="fa fa-edit"></span></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+            {% if product.is_block == True %}
+
+            <a href={% url 'unblockproduct' pk=product.id %}><span class="fa fa-unlock"></span></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+            {% else %}
+
+            <a href={% url 'block_product' pk=product.id %}><span class="fa fa-ban"></span></a><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            {% endif %}
+
+            {% else %}
+
+
+
+            {% endif %}
+
+
+
+
+
+            <img src="data:image/png;base64,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" class="save icon" alt="">
+        </div>
+
+
+
+
+    </div>
+    <hr>
+    <form class="" action="" method="POST">
+      {% csrf_token %}
+      <input class="btn btn-outline-danger" type="text" name="text" value="" placeholder="Leave a Review"><button class="btn btn-outline-danger" type="submit" name="button">Add</button>
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+<div class="facebook-comments">
+
+
+
+
+
+
+    {% for review in reviews %}
+
+
+
+
+
+
+    <div class="d-flex flex-row comment-row">
+        <div class="p-2"><span class="round"><img class="rounded-circle"src={{review.author.profile_image.url}} alt="user" width="50" height="50px"></span></div>
+        <div class="comment-text w-100">
+          <!--  <h5><a href={% url 'customer_detail' pk=review.author.id %}>@{{review.author.username}}</a></h5> -->
+          <h5>@{{review.author.username}}</h5>
+
+
+            <p align="left" class="m-b-5 m-t-10"><mark>{{review.text}}</mark></p>
+        </div>
+    </div><hr>
+
+
+     {% endfor %}
+
+
+
+
+
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+{% else %}
+  An error occured, please login again
+
+{% endif %}
+
+
+
+{% endblock %}

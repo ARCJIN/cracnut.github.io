@@ -1,0 +1,243 @@
+.my-body{
+	height: fit-content;
+	background:#F5F5F5;
+	border:1px solid lightgray;
+	font-family:sans-serif
+}
+
+
+.my-options{
+	margin-right: 2em;
+	float: right;
+  position: relative;
+  bottom: 1em;
+}
+.my-icons{
+	border-right: 1px solid;
+	padding:0.2em;
+}
+.my-footer{
+	background:#212121;
+	color:gainsboro;
+	padding:1em;
+}
+.footer-wraper{
+	display:flex;
+	position: relative;
+  left: 12em;
+}
+.my-status{
+	padding:1em;
+	box-shadow: 1px 4px 20px 1px lightgrey;
+}
+.cart-body{
+	padding:1em;
+}
+.my-notification{
+	margin:0 auto;
+	padding:0.4em;
+	border-radius:0.2em;
+	text-align:center;
+	width:80%;
+	background:#848AC6;
+	color:white;
+}
+.my-cart-list{
+	position:relative;
+	padding:0.4em;
+	background:white;
+	border:1px solid lightgray;
+	border-radius:0.2em;
+	box-shadow: 0px 0px 4px 0px lightgrey;
+}
+.my-cart-header{
+	padding:0.2em;
+	display: flex;
+  flex-wrap: wrap;
+	border-bottom:1px solid lightgray;
+	font-weight:700;
+}
+.my-cart-body{
+	padding:0.4em;
+}
+.my-item-details{
+	display: flex;
+  flex-wrap: wrap;
+	padding: 0.8em;
+  background: #f5f5f5;
+	border-radius:2px;
+	box-shadow:0px 0px 1px 1px lightgrey;
+}
+.my-cart-body .my-item-details:not(:first-child) {
+    margin-top:0.4em;
+}
+.fourty{
+	width:40%;
+}
+.twenty{
+	width:20%;
+}
+.input-quantity{
+	text-align: center;
+}
+.remove-item-span{
+	position:relative;
+	left:1em;
+}
+.remove-item-button{
+	background:red;
+	border:0;
+	color:white;
+	padding:0.3em;
+	border-radius:4px
+}
+.my-item-image{
+		width: 60px;
+    height: 65px;
+}
+/* External css file */
+.navigation_menu {
+  width: 100%;
+}
+
+.navigation_tabs {
+   counter-reset: step;
+}
+
+/* one item */
+.navigation_tabs li:first-child:nth-last-child(1) {
+  width: 100%;
+}
+
+/* two items */
+.navigation_tabs li:first-child:nth-last-child(2),
+.navigation_tabs li:first-child:nth-last-child(2) ~ li {
+  width: 49%;
+}
+
+/* three items */
+.navigation_tabs li:first-child:nth-last-child(3),
+.navigation_tabs li:first-child:nth-last-child(3) ~ li {
+  width: 30.3333%;
+}
+
+/* four items */
+.navigation_tabs li:first-child:nth-last-child(4),
+.navigation_tabs li:first-child:nth-last-child(4) ~ li {
+  width: 24%;
+}
+
+/* five items */
+.navigation_tabs li:first-child:nth-last-child(5),
+.navigation_tabs li:first-child:nth-last-child(5) ~ li {
+  width: 19%;
+}
+
+/* six items */
+.navigation_tabs li:first-child:nth-last-child(6),
+.navigation_tabs li:first-child:nth-last-child(6) ~ li {
+  width: 16%;
+}
+
+.navigation_tabs li {
+  list-style: none;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+a {
+  color: #000;
+}
+
+.navigation_tabs li a {
+  text-decoration: none;
+}
+
+.navigation_tabs li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height : 30px;
+  border: 1px solid #ddd;
+  border-radius: 100%;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  background-color: #fff;
+}
+.navigation_tabs li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: #ddd;
+  top: 13px;
+  left: -50%;
+  z-index : -1;
+}
+
+.navigation_tabs li:first-child:after {
+  content: none;
+}
+
+.navigation_tabs li.tab_active,
+.navigation_tabs li.tab_inactive,
+.navigation_tabs li.tab_active a,
+.navigation_tabs li.tab_inactive a{
+  color: green;
+}
+
+.navigation_tabs li.tab_active a:hover,
+.navigation_tabs li.tab_inactive a:hover {
+  font-weight: bold;
+}
+
+
+.navigation_tabs li.tab_active:before {
+  border-color: green;
+}
+
+.navigation_tabs li.tab_inactive:before {
+  border-color: green;
+  background-color: green;
+  color: #fff;
+  content: "\2713";
+}
+
+
+.navigation_tabs li.tab_inactive + li:after {
+  background-color: green;
+}
+/* Totals section */
+.totals .totals-item {
+  float: right;
+  clear: both;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.totals .totals-item label {
+  float: left;
+  clear: both;
+  width: 79%;
+  text-align: right;
+}
+.totals .totals-item .totals-value {
+  float: right;
+  width: 21%;
+  text-align: right;
+}
+.totals .totals-item-total {
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+
+.abc{
+	display: flex;
+	justify-content: center;
+	vertical-align: middle;
+}
+input{
+	width: 30px;
+}

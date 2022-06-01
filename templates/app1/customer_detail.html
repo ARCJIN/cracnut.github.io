@@ -1,0 +1,275 @@
+
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/detailtocus.css' %}>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+
+{% if user.is_login %}
+
+
+
+
+
+
+
+<header>
+
+	<div class="container">
+
+		<div class="profile">
+
+			<div class="profile-image">
+
+				{% if customer.profile_image %} <img src={{customer.profile_image.url}} alt="Error in Profile Photo" height="200px" width="200px"> {% else %} <img src=https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png alt="" height="200px"> {% endif %}
+
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name">@{{customer.username}}</h1>
+				{% if user.is_admin or customer == user %}
+
+					<a href={% url 'update_customer' pk=customer.id %}><button class="btn profile-edit-btn">  Edit </button></a>
+				{% else %}
+
+
+				{% endif %}
+
+			<table>
+				<tr>
+					<td><form class=""  method="post">
+	          {% csrf_token %}
+
+	           {% if customer != user %}
+
+	           {% if user.is_customer %}
+
+
+	             {% endif %}
+	             {% if customer not in user.followings.all %}
+							 	{% if customer.is_private %}
+									{% if req_sent %}
+									<button type="submit" class="btn profile-edit-btn" name="delreq"> Unrequest </button>
+									{% else %}
+									<button type="submit" class="btn profile-edit-btn" name="req"> Request </button>
+									{% endif %}
+
+								{% else %}
+	               <button type="submit" class="btn profile-edit-btn" name="follow"> Follow </button>
+								 {% endif %}
+	             {% else %}
+	               <button type="submit" class="btn profile-edit-btn" name="unfollow">UnFollow</button>
+	             {% endif %}
+	             {% endif %}
+
+	        </form>
+				</td>
+					<td>{% if user.is_customer and user != customer %}
+          <a href={% url 'transfer' pk=customer.id %}><button class="btn profile-edit-btn"> +Transfer </button></a><br>
+          {% endif %}
+</td>
+					<td><form class=""  method="post">
+	          {% csrf_token %}
+	          {% if customer != user %}
+
+	               {% if user.is_customer %}
+	                 {% if user.interested == customer.gender and customer.interested == user.gender %}
+	                   {% if user in customer.crushed.all %}
+
+	                     <button type="submit" class="btn profile-edit-btn" name="uncrushed">  UNCRUSH </button>
+	                   {% else %}
+	                     <button type="submit" class="btn profile-edit-btn" name="crushed">  +CRUSH </button>
+	                   {% endif %}
+
+	                 {% endif %}
+	               {% endif %}
+	             {% endif %}
+	        </form></td>
+
+				</tr>
+				<tr>
+					<td>  {% if user.is_admin %}
+	          <a href={% url 'tagrequests' pk=customer.id %}> <button class="btn profile-edit-btn">  Tags </button></a>
+
+	          {% else %}
+
+
+	          {% endif %}</td>
+					<td>{% if user.is_admin %}
+             <a href={% url 'delete_customer' pk=customer.id %}><button class="btn profile-edit-btn">  Delete</button></a>
+
+
+          {% endif %}</td>
+					<td>{% if user.is_admin %}
+
+             {% if customer.is_block == True %}
+                  <a href={% url 'unblockcustomer' pk=customer.id %}><button class="btn profile-edit-btn">  Unblock</button></a>
+
+             {% else %}
+
+                 <a href={% url 'block_customer' pk=customer.id %}><button class="btn profile-edit-btn">  Block </button></a>
+             {% endif %}
+
+          {% endif %}</td>
+
+				</tr>
+			</table>
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="profile-stats">
+
+				<table>
+					<tr>
+						<td><li><span class="profile-stat-count">{{x}}</span> Posts</li></td>
+						<td><li><span class="profile-stat-count"><a href={% url 'follower_list' pk=customer.id %}>{{customer.followers.count}}</a></span> Followers</li></td>
+						<td><li><span class="profile-stat-count"><a href={% url 'following_list' pk=customer.id %}>{{customer.followings.count}}</a></span> Following</li></td>
+					</tr>
+					{% if  user == customer or user.is_admin %}
+
+
+
+
+
+					<tr>
+						<td><li><span class="profile-stat-count">{{customer.crushed.count}}</span> Crush</li></td>
+						<td><li><span class="profile-stat-count">{{customer.money_owned}}</span> Money</li></td>
+						<td><li><span class="profile-stat-count">{{customer.crypto_owned}}</span> Crypto</li></td>
+					</tr>
+
+					{% endif %}
+				</table>
+
+
+
+
+			</div>
+<br>
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name"></span> {{customer.desc}}</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+<main>
+{% if customer.is_private == False or user in customer.followers.all or customer == user or user.is_admin %}
+	<div class="container">
+
+		<div class="gallery">
+
+
+
+
+			{% for post in posts %}
+				{% if post.is_block == False and post.is_private == False or user.is_admin %}
+
+			<a href={% url 'post_detail' pk=post.pk %}>
+				<div class="gallery-item" tabindex="0">
+
+					<img src={{post.profile_image.url}} alt="post" height="285px" width="280px">
+
+					<div class="gallery-item-info">
+						<ul>
+							<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fa fa-heart" aria-hidden="true"></i> {{post.likers.count}}</li>
+							<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fa fa-comment" aria-hidden="true"></i>{{post.num_of_comments}}</li>
+						</ul>
+
+
+
+
+					</div>
+
+				</div></a>
+
+				{% endif %}
+
+			{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+		<!-- End of gallery -->
+
+
+
+	</div>
+
+	<!-- End of container -->
+
+	{% if x == 0 %}
+	<a href={% url 'home' %}><i class="fa fa-camera" aria-hidden="true" style="font-size:256px"></i></a>
+	<br>
+
+	{% endif %}
+{% else %}
+<i class="fa fa-lock" style="font-size:256px"></i><br>
+<h3> Account has been made private</h3>
+
+{% endif %}
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href={% static 'js/customerintro.js' %}>
+{% else %}
+You need to login to continue
+<a href={% url 'customer_login' %}>Login</a>
+
+{% endif %}
+{% endblock %}

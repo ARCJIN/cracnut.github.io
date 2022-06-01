@@ -1,0 +1,273 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/productupload.css'%}>
+
+{% if user.is_login %}
+
+    {% if user.is_seller or user.is_admin %}
+
+
+
+
+    <div class="container" >
+
+  <fieldset>
+    <form class="well form-horizontal" action="" method="POST"  id="contact_form" enctype="multipart/form-data">
+{% csrf_token %}
+  <!-- Form Name -->
+  <legend><center><h2><b>Upload Your Product</b></h2></center></legend><br>
+  <legend><center><h5><b>"To Sell"</b></h5></center></legend><br>
+
+  <!-- Text input-->
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="name" placeholder="Name" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="itemid" placeholder="ITEMID" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="category" placeholder="Category" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="colour" placeholder="Colour" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="material" placeholder="Material" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="size" placeholder="Size" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="desc" placeholder="Product Description" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="price" placeholder="price" class="form-control"  type="number">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="quantity" placeholder="Quantity" class="form-control"  type="quantity">
+      </div>
+    </div>
+  </div>
+
+
+<br><br>
+
+
+Note: All Photos of the product should be updated all at once
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="profile_image1" placeholder="i1" class="form-control"  type="file">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="profile_image2" placeholder="i2" class="form-control"  type="file">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="profile_image3" placeholder="i3" class="form-control"  type="file">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="profile_image4" placeholder="i4" class="form-control"  type="file">
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="form-group" align = "center">
+
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input  name="profile_image5" placeholder="i5" class="form-control"  type="file">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Button -->
+  <div class="form-group" align="center">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4"><br>
+      &nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspCreate <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+  </div>
+
+
+
+
+<link rel="stylesheet" href={% static 'js/customerlogin.js' %}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+      You are not Authenticated to complete this task
+    {% endif %}
+
+
+
+
+{% else %}
+  You need to login first
+{% endif %}
+
+{% endblock %}

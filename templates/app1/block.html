@@ -1,0 +1,317 @@
+{% extends 'app1/baseintro.html' %}
+{% load static %}
+<link rel="stylesheet" href={% static 'css/block.css' %}>
+{% block body_block %}
+
+{% if user.is_admin or user == item.seller %}
+
+  {% if blockorder %}
+
+    {% if item.is_block == False %}
+
+    {{msg}}
+
+
+    <form  action = {% url 'block_order' item.id %} method="POST">
+      {% csrf_token %}
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to block this order by : <b class="text-danger"><a href={% url 'customer_detail' pk=item.customer.id %}>"@{{item.customer.username}}" ?</a></b></span>
+    <span class="mobile-text">  <a href={% url 'product_detail' pk=item.product.id %}>Product Link</a></span>
+    <span class="mobile-text"> Sold by:<a href={% url 'seller_detail' pk=item.product.seller.id %}> {{item.product.seller.username}}</a></span>
+            <br>
+            <button class="btn btn-danger" type=submit"">  Confirm Block </button><br>
+              <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+        </div>
+    </div>
+
+
+    </form>
+
+
+    {% else%}
+        {{item}} is blocked
+
+    {% endif %}
+  {% endif %}
+{% else %}
+    
+{% endif %}
+
+
+
+
+
+{% if user.is_admin %}
+
+  {% if blockseller %}
+
+    {% if item.is_block == False %}
+
+
+    {{msg}}
+    <form  action = {% url 'block_seller' item.id %} method="POST">
+      {% csrf_token %}
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to block this Seller  : <b class="text-danger"><a href={% url 'seller_detail' pk=item.id %}>"@{{item.username}}" ?</a></b></span>
+    <span class="mobile-text"> Created On: {{item.created_date}}</span>
+
+            <br>
+            <button class="btn btn-danger" type=submit"">  Confirm Block </button><br>
+              <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+        </div>
+    </div>
+
+
+    </form>
+
+
+
+
+    {% else%}
+        {{item}} is blocked
+
+    {% endif %}
+  {% endif %}
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if user.is_admin %}
+
+  {% if blockcustomer %}
+
+    {% if item.is_block == False %}
+
+
+
+
+    {{msg}}
+    <form  action = {% url 'block_customer' item.id %} method="POST">
+      {% csrf_token %}
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to block this Customer  : <b class="text-danger"><a href={% url 'customer_detail' pk=item.id %}>"@{{item.username}}" ?</a></b></span>
+    <span class="mobile-text"> Created On: {{item.created_date}}</span>
+
+            <br>
+            <button class="btn btn-danger" type=submit"">  Confirm Block </button><br>
+            <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+        </div>
+    </div>
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+        {{item}} is blocked
+    {% endif %}
+  {% endif %}
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if user.is_admin %}
+
+  {% if blockpost %}
+
+    {% if item.is_block == False %}
+    {{msg}}
+    <form  action = {% url 'block_post' item.id %} method="POST">
+      {% csrf_token %}
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to block this Post by : <b class="text-danger"><a href={% url 'customer_detail' pk=item.creator.id %}>"@{{item.creator.username}}" ?</a></b></span>
+
+            <br>
+          <button class="btn btn-danger" type=submit"">  Confirm Block </button><br>
+              <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+        </div>
+    </div>
+
+
+    </form>
+    {% else %}
+        {{item.desc}} is blocked
+    {% endif %}
+  {% endif %}
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if user.is_admin %}
+
+  {% if blockcomment %}
+
+    {% if item.is_block == False %}
+
+    {{msg}}
+    <form  action = {% url 'block_comment' item.id %} method="POST">
+      {% csrf_token %}
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to block this comment by : <b class="text-danger"><a href={% url 'customer_detail' pk=item.creator.id %}>"@{{item.creator.username}}" ?</a></b></span>
+    <span class="mobile-text"> Comment: {{item.text}}</span>
+    <span class="mobile-text"> Post by:<a href={% url 'customer_detail' pk=item.post.creator.id %}> {{item.post.creator.username}}</a></span>
+            <br>
+            <button class="btn btn-outline-info" type=submit"">  Confirm Block </button><br>
+              <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+        </div>
+    </div>
+
+
+    </form>
+
+    {% else %}
+        {{item}} is blocked
+    {% endif %}
+  {% endif %}
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if user.is_admin %}
+
+  {% if blockproduct %}
+
+    {% if item.is_block == False %}
+
+    {{msg}}
+    <form  action = {% url 'block_product' item.id %} method="POST">
+      {% csrf_token %}
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Confirmation Box</h5> <br><span class="mobile-text">Are you sure you want to block this product by : <b class="text-danger"><a href={% url 'seller_detail' pk=item.seller.id %}>"@{{item.seller.username}}" ?</a></b></span>
+
+            <br>
+          <button class="btn btn-danger" type=submit""> Confirm Block </button><br>
+            <a href={% url 'home' %}><button class="btn btn-outline-danger" type="button" name="button">Cancel</button></a>
+        </div>
+    </div>
+
+
+    </form>
+
+
+
+
+    {% else %}
+        {{item}} is blocked
+    {% endif %}
+  {% endif %}
+{% else %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

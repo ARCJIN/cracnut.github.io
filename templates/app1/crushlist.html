@@ -1,0 +1,72 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+{% if user.is_login %}
+
+
+<link rel="stylesheet" href={% static 'css/listoffollowers.css' %}>
+
+
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+<div class="row">
+
+
+
+
+      <!-- /.col-lg-3 col-md-4 -->
+
+
+
+      {% for following in user.crushed.all %}
+
+
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="panel panel-purple userlist">
+          <div class="panel-body text-center">
+            <div class="userprofile">
+              <div class="userpic"> {% if following.profile_image %} <img src={{following.profile_image.url}} alt="Profile Photo not uploaded" class="userpicimg" > {% else %} <img src=https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png alt="" height="200px"> {% endif %} </div>
+              <h3 class="username">{{following.name}} {% if following.is_certified %}<img height="30px" src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-approval-alert-icongeek26-outline-colour-icongeek26.png"/>{% endif %}</h3>
+              <p>{{following.crypto_owned}}</p>
+            </div>
+            <p><a href={% url 'customer_detail' pk=following.id %}>{{following.email}}</a> <br> {{following.phone}}</p>
+
+          </div>
+          <div class="panel-footer">   <a href={% url 'customer_detail' pk=following.id %}> <button class="btn btn-outline-info">  Visit Profile </button></a> </div>
+        </div>
+      </div>
+      
+
+      {% endfor %}
+      <!-- /.col-lg-3 col-md-4 -->
+
+
+      <!-- /.col-lg-3 col-md-4 -->
+
+    </div>
+    </div>
+
+
+
+<link rel="stylesheet" href={% static 'js/follower_list.js' %}>
+
+
+
+
+
+
+
+
+{% else %}
+
+You need to login
+
+{% endif %}
+
+
+
+
+{% endblock %}

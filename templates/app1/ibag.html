@@ -1,0 +1,178 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+{% load static %}
+{% load widget_tweaks %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+{% if user.is_login %}
+
+
+<link rel="stylesheet" href={% static 'css/bagtobeedited.css'%} >
+<script src={% static 'js/bagd.js' %}>
+  </script>
+
+
+     <body class="my-body">
+
+
+
+        <div class="cart-body">
+           <div class="my-notification">Shope for $5000 & more and get 10% discount on your  order</div>
+           <br>
+           <h2>Jinx Cart</h2>
+           <div class="my-cart-list">
+              <div class="my-cart-header">
+                 <div class="fourty">Product</div>
+                 <div class="twenty">Price</div>
+                 <div class="twenty">Quantity</div>
+                 <div class="twenty">Subtotal</div>
+              </div>
+              <div class="my-cart-body">
+                {% if x == 0 %}
+                  <i class="fa fa-shopping-bag" aria-hidden="true" style="font-size:256px"></i><br>
+            <h3>  <b>  Your cart is empty </b> </h3>
+                {% else %}
+                  {% for item in bag %}
+                 <div class="my-item-details">
+                    <div class="fourty">
+                      <a href={% url 'product_detail' pk=item.content.id %}><img src={{item.content.profile_image1.url}} alt="phone" border="0" class="my-item-image" /></a>
+
+                    </div>
+                    <div class="twenty price">Rs {{item.content.price}}</div>
+                    <div class="twenty">{{item.quantity}}</div>
+                    <div class="twenty total">
+                       <span class="remove-item-span"><h5>{% widthratio item.content.price 1 item.quantity %}</h5>
+
+                       <form class="" name="delform" action="" method="post">
+                         {% csrf_token %}
+                          <input type="hidden" name="id" value={{item.content.id}}>
+                           <button type="submit" class="remove-item-button" name="delbutton">Remove</button>
+
+                       </form>
+                       </span>
+                    </div>
+                 </div>
+                 {% endfor %}
+
+                 <br>
+                 <b><h5>Total Cost: {{sum}}</h5></b>
+
+                 <form class="mantra"  method="POST">
+                 <div class="abc">
+
+                     {% csrf_token %}
+
+
+
+<div class="form-group">
+
+
+
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-home"></i>&nbsp</span>
+    <input required="true" name="address" placeholder="Home" class="form-control" type="text">
+      </div>
+    </div>
+  </div>
+<br>
+  <!-- Text input-->
+
+  <div class="form-group">
+
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-home"></i>&nbsp</span>
+    <input required="true" name="city" placeholder="city" class="form-control"  type="text">
+      </div>
+    </div>
+  </div>
+<br>
+  <!-- Select Basic -->
+
+  <div class="form-group">
+
+      <div class="col-md-4 selectContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-list"></i>&nbsp</span>
+      <select required="true" name="state" class="form-control selectpicker" >
+        <option value=" " >State</option>
+        <option> Andaman and Nicobar Islands </option>
+        <option>Andhra Pradesh</option>
+        <option>Arunachal Pradesh</option>
+        <option >Assam</option>
+        <option >Bihar</option>
+        <option> Chandigarh </option>
+        <option >Chattisgarh</option>
+        <option> Dadra and Nagar Haveli</option>
+        <option> Daman and Diu </option>
+        <option >Goa</option>
+        <option >Gujrat</option>
+        <option >Haryana</option>
+        <option >Himachal Pradesh</option>
+        <option> J & K</option>
+        <option> Jharkhand</option>
+        <option >Karnataka</option>
+        <option >Kerala</option>
+        <option> Ladakh </option>
+        <option> Lakshadweep</option>
+        <option >Madhya Pradesh</option>
+        <option >Maharashtra</option>
+        <option >Manipur</option>
+        <option >Meghalaya</option>
+        <option> Mizoram</option>
+        <option >Nagaland</option>
+        <option>New Delhi</option>
+        <option >Odisha</option>
+        <option>Puducherry</option>
+        <option>Punjab</option>
+        <option >Rajasthan</option>
+        <option> Sikkim</option>
+        <option >Tamil Nadu</option>
+        <option >Telangana</option>
+        <option>Tripura</option>
+        <option>Uttarakhand</option>
+        <option>Uttar Pradesh</option>
+        <option>West Bengal</option>
+
+      </select>
+    </div>
+  </div>
+  </div>
+<br>
+  <div class="form-group">
+
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i>&nbsp</span>
+    <input required="true" name="zip" placeholder="Zip" class="form-control"  type="text">
+      </div>
+  </div>
+  </div>
+
+<br>
+
+
+
+                 </div>
+                 <br><button type="submit" class="btn btn-outline-danger" name="placeorder">Order Now</button>
+                 </form>
+ {% endif %}
+              </div>
+           </div>
+
+        </div>
+
+
+
+
+
+
+{% else %}
+<h2>YOU need to login first</h2>
+{% endif%}
+
+
+{% endblock %}

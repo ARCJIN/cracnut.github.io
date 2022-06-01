@@ -1,0 +1,147 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}
+
+
+{% load static %}
+<!-- JavaScript Bundle with Popper -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href={% static 'css/add_customer.css' %}>
+
+
+
+
+
+
+
+      <div class="container" >
+
+        <form class="well form-horizontal" action="" method="POST"  id="contact_form" enctype="multipart/form-data">
+    <fieldset>
+{% csrf_token %}
+    <!-- Form Name -->
+    <legend><center><h2><b>Customer SignUP</b></h2></center></legend><br>
+    <legend><center><h5><b>For Fashion made for You</b></h5></center></legend><br>
+
+    <!-- Text input-->
+
+
+
+
+    <div class="form-group" align = "center">
+
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input  name="name" placeholder="Name" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+
+    <div class="form-group" align = "center">
+      <label class="col-md-4 control-label" ></label>
+        <div class="col-md-4 inputGroupContainer" >
+        <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="username" placeholder="Username" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group" align = "center">
+      <label class="col-md-4 control-label" ></label>
+        <div class="col-md-4 inputGroupContainer" >
+        <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="email" placeholder="Email" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group" align = "center">
+      <label class="col-md-4 control-label" ></label>
+        <div class="col-md-4 inputGroupContainer" >
+        <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="contactnumber" placeholder="ContactNumber" class="form-control"  type="phone">
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group" align = "center">
+      <label class="col-md-4 control-label" ></label>
+        <div class="col-md-4 inputGroupContainer" >
+        <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="password" placeholder="Password" class="form-control"  type="password">
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+
+    <div class="form-group" align = "center">
+      <label class="col-md-4 control-label" ></label>
+        <div class="col-md-4 inputGroupContainer" >
+        <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="address" placeholder="Address" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- Text input-->
+
+
+        <div class="form-group" align = "center">
+          <label class="col-md-4 control-label" ></label>
+            <div class="col-md-4 inputGroupContainer" >
+            <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id='image' name="profile_image" placeholder="Profile_image" class="form-control"  type="file">
+            </div>
+          </div>
+        </div>
+
+    <!-- Text input-->
+
+
+
+    <!-- Button -->
+    <div class="form-group" align="center">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4"><br>
+        &nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+    </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href={% static 'js/customerlogin.js' %}>
+
+  {% endblock %}
