@@ -25,7 +25,7 @@ SECRET_KEY = '!$ddo=0dih&9_#5nfb&sn#yueqjj7glsstot*@_6*3@c=@huzy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1:8000','localhost','cracnut.pythonanywhere.com']
+ALLOWED_HOSTS = ['cracnut.pythonanywhere.com']
 
 
 # Application definition
